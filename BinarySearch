@@ -1,0 +1,42 @@
+# check if number is repeated
+def location_card(card,query,mid):
+    mid_number=card[mid]
+    #print("mid: ",mid,"mid_number: ",mid_number)
+    if mid_number==query:
+        #prevent from going negative
+        if mid-1>=0 and card[mid-1]==query:
+            return 'left'
+        else:
+            return "Found"
+    elif mid_number < query:
+        return 'left'
+    elif mid_number > query:
+        return 'Right' 
+
+
+def locate_card(card,query):
+    # creating two elements
+    low=0
+    high= len(card)-1
+
+    # starting a loop
+    for i in range(0,len(card)):
+        # finding a mid of cards
+        mid=(high+low)//2
+        mid_number=card[mid]
+        result=location_card(card,query,mid)
+        # help in checking wether it is working properly or ntot
+        print("High: ",high, "Low: ",low,"Mid: ",mid,"Mid_number ",mid_number)
+        # checking for mid number
+        if result=='Found':
+            return mid
+        # if mid number is less than query than mid become new high  
+        elif result=='left':
+                high=mid
+        # if mid number is greater than query than mid become new low
+        elif result=='Right':
+                low=mid
+    return -1
+
+z=locate_card(["""your input"""],"""number to be searched""")
+print(z)
